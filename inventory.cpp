@@ -2,12 +2,26 @@
 #include "inventory.h"
 #include <iostream>
 #include <fstream>
+#include <limits>
 
 void Inventory::addItem(){
     Item newItem;
     newItem.inputItem();
-    items.push_back(newItem);
-    std::cout << "Item has added successfully!" << std::endl;
+    bool exists = false;
+    
+    for(const auto& item : items){
+        if(item.id == newItem.id){
+            exists = true;
+            break;
+        }
+    }
+    if(exists){
+        std::cout << "ID already exists!" << std::endl;
+    } else {
+        items.push_back(newItem);
+        std::cout << "Item has been added successfully!" << std::endl;
+    }
+
     std::cout << std::endl;
 }
 
@@ -127,15 +141,55 @@ void Inventory::updateItem(){
         switch(choice){
             case 1:
                 std::cout << "Enter a new name: " << std::endl;
-                std::cin >> items[index].name;
+                while(true){
+                    std::cin >> items[index].name;
+                    bool onlyDigits = true;
+
+                    for(char c : items[index].name){
+                        if(!(std::isdigit(c) && c != ' ')) {
+                            onlyDigits = false;
+                            break;
+                        }
+                    }
+                    if(onlyDigits){
+                        std::cout << "Invalid input. please enter the valid string for updating item's name: " << std::endl;
+                    } else {
+                        break;
+                    }
+                }
+                
                 break;
             case 2:
                 std::cout << "Enter a new price: " << std::endl;
-                std::cin >> items[index].price;
+                while(true){
+                    std::cin >> items[index].price;
+
+                    if(std::cin.fail()){
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        std::cout << "Invalid input. Please enter valid integer for updating the price: " << std::endl;
+                    } else {
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        break;
+                    }
+                }
+                
                 break;
             case 3:
                 std::cout << "Enter a new quantity: " << std::endl;
-                std::cin >> items[index].quantity;
+                while(true){
+                    std::cin >> items[index].quantity;
+
+                    if(std::cin.fail()){
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        std::cout << "Invalid input. Please enter a valid integer for updating the price: " << std::endl;
+                    } else {
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        break;
+                    }
+                }
+                
                 break;
             default:
                 std::cout << "Invalid choice, please try again!" << std::endl;
