@@ -6,9 +6,8 @@ void Item::inputItem(){
     std::cin >> id;
     std::cin.ignore();
 
-    std::cout << "Enter item name" << std::endl;
-    std::cin >> name;
-    std::cin.ignore();
+    std::cout << "Enter item name (dont seperate words with space): " << std::endl;
+    std::getline(std::cin, name);
 
     std::cout << "Enter item price: " << std::endl;
     std::cin >> price;

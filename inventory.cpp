@@ -13,7 +13,9 @@ void Inventory::addItem(){
 
 void Inventory::displayInventory() const {
     if(items.empty()) {
+        std::cout << std::endl;
         std::cout << "Inventory is empty" << std::endl;
+        std::cout << std::endl;
         return;
     }
     for(const auto& item : items){
