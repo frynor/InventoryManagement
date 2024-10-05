@@ -81,7 +81,19 @@ void Inventory::deleteItem(){
 
     std::cout << "Enter item's ID to delete: " << std::endl;
     int id;
-    std::cin >> id;
+    while(true){
+        std::cin >> id;
+
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid input. Please enter valid integer for item's ID: " << std::endl;
+        } else {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            break;
+        }
+    }
+    
     bool found = false;
 
 
@@ -97,8 +109,10 @@ void Inventory::deleteItem(){
     if(!found){
         std::cout << "Invalid ID, item was not found!" << std::endl;
         return;
-    } else { 
+    } else {
+        std::cout << std::endl; 
         std::cout << "Item was deleted successfully!" << std::endl;
+        std::cout << std::endl;
     }
 }
 
@@ -137,21 +151,22 @@ void Inventory::updateItem(){
 
         int choice;
         std::cin >> choice;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         switch(choice){
             case 1:
                 std::cout << "Enter a new name: " << std::endl;
                 while(true){
-                    std::cin >> items[index].name;
+                    std::getline(std::cin, items[index].name);
                     bool onlyDigits = true;
 
                     for(char c : items[index].name){
-                        if(!(std::isdigit(c) && c != ' ')) {
+                        if(!(std::isdigit(c) && c != ' ' && items[index].name.size() > 1)) {
                             onlyDigits = false;
                             break;
                         }
                     }
-                    if(onlyDigits){
+                    if(!onlyDigits){
                         std::cout << "Invalid input. please enter the valid string for updating item's name: " << std::endl;
                     } else {
                         break;

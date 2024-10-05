@@ -1,3 +1,5 @@
+#ifndef INVENTORY_H
+#define INVENTORY_H
 #pragma once
 #include "item.h"
 #include <vector>
@@ -13,3 +15,5 @@ class Inventory{
 		void deleteItem();
 		void updateItem();
 };
+
+#endif // INVENTORY_H

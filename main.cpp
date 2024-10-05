@@ -1,13 +1,13 @@
-#include "item.h"
-#include "item.cpp"
-#include "inventory.h"
 #include "inventory.cpp"
+#include "item.cpp"
+#include "item.h"
+#include "inventory.h"
 #include <iostream>
+
 
 int main(){
     Inventory inventory;
     inventory.loadFromFile();
-
     while(true){
         std::cout << "1. Add a new item" << std::endl;
         std::cout << "2. Display items" << std::endl;
