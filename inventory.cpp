@@ -30,7 +30,7 @@ void Inventory::saveToFile() const {
         return;
     }
     for(const auto& item: items){
-        file << item.id << "," << item.name << "," << item.price << "," << item.quantity;
+        file << item.id << "," << item.name << "," << item.price << "," << item.quantity << std::endl;
     }
     file.close();
     std::cout << "Inventory saved to the file!" << std::endl;
@@ -60,17 +60,18 @@ void Inventory::loadFromFile(){
 void Inventory::deleteItem(){
     displayInventory();
 
+    if(items.empty()){
+        std::cout << std::endl;
+        return;
+    }
+
     std::cout << "Enter item's ID to delete: " << std::endl;
     int id;
     std::cin >> id;
     bool found = false;
 
-    if(items.empty()){
-        std::cerr << "Inventory is empty!" << std::endl;
-        return;
-    }
 
-    
+
     for(int i = 0; i < items.size(); i++){
         if(items[i].id == id && !found){
             std::cout << "Found item to delete, deleting..." << std::endl;
@@ -90,16 +91,16 @@ void Inventory::deleteItem(){
 void Inventory::updateItem(){
     displayInventory();
 
+    if(items.empty()){
+        std::cout << std::endl;
+        return;
+    }
+
     std::cout << "Enter item's ID to update: " << std::endl;
     int id;
     std::cin >> id;
     bool found = false;
     size_t index = 0;
-
-    if(items.empty()){
-        std::cout << "Inventory is empty!" << std::endl;
-        return;
-    }
 
     for(size_t i = 0; i < items.size(); i++){
         if(items[i].id == id && !found){
