@@ -9,11 +9,12 @@ class Inventory{
 		std::vector<Item> items;
 	public:
 		void addItem();
-		void displayInventory() const;
+		void displayInventory();
 		void saveToFile() const;
 		void loadFromFile();
 		void deleteItem();
 		void updateItem();
+		void sortInventory();
 };
 
 #endif // INVENTORY_H
