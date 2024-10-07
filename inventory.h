@@ -15,6 +15,7 @@ class Inventory{
 		void deleteItem();
 		void updateItem();
 		void sortInventory();
+		void searchItems() const;
 };
 
 #endif // INVENTORY_H

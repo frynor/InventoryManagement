@@ -1,9 +1,6 @@
 #include "item.h"
-#include <algorithm>
+#include "quickSort.h"
 #include <vector>
-
-int partition(std::vector<Item>& items, int low, int high);
-void quickSort(std::vector<Item>& items, int low, int high);
 
 int partition(std::vector<Item>& items, int low, int high){
 	Item& pivot = items[high];

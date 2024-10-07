@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <limits>
+#include <algorithm>
 
 void Inventory::sortInventory() {
   if (items.empty()) {
@@ -13,6 +14,41 @@ void Inventory::sortInventory() {
 
   quickSort(items, 0, items.size() - 1);
   std::cout << "Inventory has been sorted by ID" << std::endl;
+}
+
+void Inventory::searchItems() const {
+	if (items.empty()) {
+		std::cout << std::endl;
+		std::cout << "Inventory is empty, cant search!" << std::endl;
+		std::cout << std::endl;
+		
+		return;
+	}
+
+	std::cout << "\nSearch options: " << std::endl;
+	std::cout << "1. Search by ID: " << std::endl;
+	std::cout << "2. Search by name: " << std::endl;
+	std::cout << "3. Enter your choice: " << std::endl;
+
+	int choice;
+	std::cin >> choice;
+
+	switch(choice){
+		case 1:
+			int searchID;
+			std::cout << "Enter ID to search: " << std::endl;
+			std::cin >> searchID;
+			auto it = std::find_if(items.begin(), items.end(),
+			  [searchID](const Item& item) { return item.id == searchID; });
+			if(it != items.end()){
+				std::cout << "Item found:" << std::endl;
+				it->displayItem();
+			} else {
+				std::cout << "No item was found with " << searchID << std::endl;
+			}
+			break;
+	}
+
 }
 
 void Inventory::addItem() {
@@ -39,6 +75,7 @@ void Inventory::addItem() {
 void Inventory::displayInventory() {
 
 sortInventory();
+
   
   if (items.empty()) {
     std::cout << std::endl;
@@ -49,6 +86,8 @@ sortInventory();
   for (const auto &item : items) {
     item.displayItem();
   }
+	
+  searchItems();
 }
 
 void Inventory::saveToFile() const {
