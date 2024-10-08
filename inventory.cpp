@@ -27,14 +27,14 @@ void Inventory::searchItems() const {
 
 	std::cout << "\nSearch options: " << std::endl;
 	std::cout << "1. Search by ID: " << std::endl;
-	std::cout << "2. Search by name: " << std::endl;
-	std::cout << "3. Enter your choice: " << std::endl;
+	std::cout << "2. Exit to menu: " << std::endl;
+	std::cout << "Enter your choice: " << std::endl;
 
 	int choice;
 	std::cin >> choice;
 
 	switch(choice){
-		case 1:
+		case 1:{
 			int searchID;
 			std::cout << "Enter ID to search: " << std::endl;
 			std::cin >> searchID;
@@ -47,6 +47,10 @@ void Inventory::searchItems() const {
 				std::cout << "No item was found with " << searchID << std::endl;
 			}
 			break;
+			}
+		case 2:{
+			return;
+		}
 	}
 
 }
@@ -72,7 +76,7 @@ void Inventory::addItem() {
   std::cout << std::endl;
 }
 
-void Inventory::displayInventory() {
+void Inventory::displayInventory(bool includeSearch = true) {
 
 sortInventory();
 
@@ -87,7 +91,9 @@ sortInventory();
     item.displayItem();
   }
 	
-  searchItems();
+  if(includeSearch){
+		searchItems();	
+	}
 }
 
 void Inventory::saveToFile() const {
@@ -126,7 +132,7 @@ void Inventory::loadFromFile() {
 }
 
 void Inventory::deleteItem() {
-  displayInventory();
+  displayInventory(false);
 
   if (items.empty()) {
     std::cout << std::endl;
@@ -272,4 +278,14 @@ void Inventory::updateItem() {
   } else {
     std::cout << "Item not found." << std::endl;
   }
+}
+
+void Inventory::dataAnalysis() {
+	int value{};
+	for(const auto& item : items){
+		value += item.price;
+	}
+
+
+	std::cout << "Total Inventory value: " << value << "$" << std::endl;
 }

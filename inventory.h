@@ -9,13 +9,14 @@ class Inventory{
 		std::vector<Item> items;
 	public:
 		void addItem();
-		void displayInventory();
+		void displayInventory(bool includeSearch);
 		void saveToFile() const;
 		void loadFromFile();
 		void deleteItem();
 		void updateItem();
 		void sortInventory();
 		void searchItems() const;
+		void dataAnalysis();
 };
 
 #endif // INVENTORY_H

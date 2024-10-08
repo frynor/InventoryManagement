@@ -13,7 +13,8 @@ int main() {
     std::cout << "2. Display items" << std::endl;
     std::cout << "3. Delete an item" << std::endl;
     std::cout << "4. Update an item" << std::endl;
-    std::cout << "5. Save and exit" << std::endl;
+    std::cout << "5. Data analysis" << std::endl;
+    std::cout << "6. Save and exit" << std::endl;
     std::cout << "Enter your choice: " << std::endl;
 
     int choice;
@@ -33,8 +34,11 @@ int main() {
       inventory.updateItem();
       break;
     case 5:
+      inventory.dataAnalysis();
+      break;
+    case 6:
       inventory.saveToFile();
-      std::cout << "Saving and exiting program..." << std::endl;
+      std::cout << "Exiting..." << std::endl;
       return 0;
     }
   }
