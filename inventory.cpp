@@ -5,6 +5,7 @@
 #include <iostream>
 #include <limits>
 #include <algorithm>
+#include <sstream>
 
 void Inventory::sortInventory() {
   if (items.empty()) {

@@ -17,6 +17,7 @@ class Inventory{
 		void sortInventory();
 		void searchItems() const;
 		void dataAnalysis();
+
 };
 
 #endif // INVENTORY_H
